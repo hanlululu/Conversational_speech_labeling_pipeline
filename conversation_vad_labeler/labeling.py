@@ -116,13 +116,8 @@ def merge_turns_with_context(
             if gap > max_gap_sec:
                 break  # Gap too large, stop looking
 
-            # Check what's between current and next_segment
-            between = df[
-                (df.index > i) &
-                (df.index < j) &
-                (df['start_sec'] >= current['end_sec']) &
-                (df['end_sec'] <= next_segment['start_sec'])
-            ]
+            # Check what's between current and next_segment (by index)
+            between = df[(df.index > i) & (df.index < j)]
 
             # Can merge if:
             # 1. Nothing in between, OR
